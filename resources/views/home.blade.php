@@ -4,61 +4,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SpeakUp Academy - Dashboard</title>
+    <title>SpeakUp Academy - Premium Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=InSter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
         :root {
-            --primary: #667eea;
-            --primary-light: #764ba2;
-            --secondary: #f093fb;
-            --accent: #ff6b6b;
-            --accent-light: #ff9e9e;
-            --gold: #f6d365;
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --accent: #f59e0b;
+            --accent-light: #fbbf24;
+            --success: #10b981;
+            --success-light: #34d399;
+            --warning: #f59e0b;
+            --error: #ef4444;
             --light: #f8fafc;
-            --light-gray: #e2e8f0;
-            --dark: #2d3748;
-            --dark-light: #4a5568;
+            --light-gray: #f1f5f9;
+            --gray: #64748b;
+            --dark: #1e293b;
+            --dark-light: #334155;
             --white: #ffffff;
-            --shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            --shadow-light: 0 10px 25px rgba(0, 0, 0, 0.05);
-            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
-            --border-radius: 16px;
-            --gradient-primary: linear-gradient(135deg, var(--primary), var(--primary-light));
-            --gradient-accent: linear-gradient(135deg, var(--accent), var(--secondary));
-            --gradient-gold: linear-gradient(135deg, var(--gold), #fda085);
+            --glass: rgba(255, 255, 255, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            --shadow-light: 0 8px 25px rgba(0, 0, 0, 0.08);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --border-radius: 20px;
+            --border-radius-sm: 14px;
+            --gradient-primary: linear-gradient(135deg, var(--primary), var(--secondary));
+            --gradient-accent: linear-gradient(135deg, var(--accent), #f97316);
+            --gradient-success: linear-gradient(135deg, var(--success), #34d399);
+            --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
         }
 
         body {
-            background: var(--light);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: var(--dark);
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            animation: float 20s infinite linear;
+            filter: blur(40px);
+        }
+
+        .floating-shape:nth-child(1) {
+            width: 400px;
+            height: 400px;
+            top: 10%;
+            left: 5%;
+            animation-duration: 25s;
+        }
+
+        .floating-shape:nth-child(2) {
+            width: 300px;
+            height: 300px;
+            top: 60%;
+            right: 10%;
+            animation-duration: 30s;
+            animation-delay: -5s;
+        }
+
+        .floating-shape:nth-child(3) {
+            width: 350px;
+            height: 350px;
+            bottom: 20%;
+            left: 15%;
+            animation-duration: 20s;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+            }
+
+            25% {
+                transform: translate(50px, 50px) rotate(90deg) scale(1.1);
+            }
+
+            50% {
+                transform: translate(100px, 0) rotate(180deg) scale(1.05);
+            }
+
+            75% {
+                transform: translate(50px, -50px) rotate(270deg) scale(1.1);
+            }
+
+            100% {
+                transform: translate(0, 0) rotate(360deg) scale(1);
+            }
         }
 
         /* Header & Navigation */
         .header {
-            background: var(--white);
+            background: var(--glass);
+            backdrop-filter: blur(20px);
             box-shadow: var(--shadow-light);
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
         }
 
         .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
+            padding: 1.2rem 2rem;
             max-width: 1400px;
             margin: 0 auto;
         }
@@ -66,39 +145,55 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
         }
 
         .logo-icon {
-            width: 40px;
-            height: 40px;
+            width: 48px;
+            height: 48px;
             background: var(--gradient-primary);
-            border-radius: 10px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 12px 30px rgba(99, 102, 241, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                box-shadow: 0 12px 30px rgba(99, 102, 241, 0.4);
+            }
+
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 15px 40px rgba(99, 102, 241, 0.6);
+            }
         }
 
         .logo-icon i {
-            font-size: 20px;
+            font-size: 22px;
             color: var(--white);
         }
 
         .logo-text {
-            font-size: 20px;
-            font-weight: 700;
-            background: var(--gradient-primary);
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #e2e8f0);
             background-clip: text;
-            /* ✅ versi standar */
             -webkit-background-clip: text;
-            /* ✅ versi WebKit (Chrome/Safari/Edge) */
             -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .nav-user {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
         }
 
         .user-info {
@@ -106,119 +201,205 @@
         }
 
         .user-name {
-            font-weight: 600;
-            color: var(--dark);
+            font-weight: 700;
+            color: var(--white);
+            font-size: 16px;
         }
 
         .user-role {
-            font-size: 12px;
-            color: var(--dark-light);
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.8);
             font-weight: 500;
         }
 
         .user-avatar {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
             background: var(--gradient-primary);
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--white);
-            font-weight: 600;
-            font-size: 18px;
+            font-weight: 700;
+            font-size: 20px;
+            box-shadow: 0 12px 30px rgba(99, 102, 241, 0.4);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .user-avatar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: var(--transition);
+        }
+
+        .user-avatar:hover::before {
+            left: 100%;
+        }
+
+        .user-avatar:hover {
+            transform: translateY(-3px) rotate(5deg);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.6);
         }
 
         /* Dashboard Container */
         .dashboard-container {
             max-width: 1400px;
-            margin: 80px auto 0;
+            margin: 100px auto 0;
             padding: 2rem;
         }
 
         /* Dashboard Header */
         .dashboard-header {
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 2rem;
+        }
+
+        .header-content {
+            flex: 1;
         }
 
         .dashboard-title {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            background: var(--gradient-primary);
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #ffffff, #e2e8f0);
             background-clip: text;
-            /* ✅ versi standar */
             -webkit-background-clip: text;
-            /* ✅ versi WebKit (Chrome/Safari/Edge) */
             -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            animation: slideInDown 0.8s ease;
         }
 
         .dashboard-subtitle {
-            color: var(--dark-light);
-            font-size: 16px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 18px;
+            line-height: 1.6;
+            animation: slideInDown 0.8s ease 0.1s both;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            animation: slideInDown 0.8s ease 0.2s both;
         }
 
         /* Stats Grid */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
         }
 
         .stat-card {
-            background: var(--white);
-            padding: 1.5rem;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            padding: 2.5rem 2rem;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-light);
             transition: var(--transition);
-            border-left: 4px solid var(--primary);
+            border: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+            animation: slideInUp 0.6s ease both;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .stat-card.accent::before {
+            background: var(--gradient-accent);
+        }
+
+        .stat-card.success::before {
+            background: var(--gradient-success);
         }
 
         .stat-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px) scale(1.02);
             box-shadow: var(--shadow);
         }
 
-        .stat-card.accent {
-            border-left-color: var(--accent);
-        }
-
-        .stat-card.gold {
-            border-left-color: var(--gold);
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
         }
 
         .stat-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1rem;
             background: var(--gradient-primary);
             color: var(--white);
-            font-size: 20px;
+            font-size: 28px;
+            box-shadow: 0 12px 30px rgba(99, 102, 241, 0.4);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover .stat-icon {
+            transform: scale(1.1) rotate(10deg);
         }
 
         .stat-card.accent .stat-icon {
             background: var(--gradient-accent);
         }
 
-        .stat-card.gold .stat-icon {
-            background: var(--gradient-gold);
+        .stat-card.success .stat-icon {
+            background: var(--gradient-success);
+        }
+
+        .stat-trend {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--success-light);
+            background: rgba(16, 185, 129, 0.1);
+            padding: 6px 12px;
+            border-radius: 20px;
+        }
+
+        .stat-trend.down {
+            color: var(--error);
+            background: rgba(239, 68, 68, 0.1);
         }
 
         .stat-value {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 4px;
-            color: var(--dark);
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: var(--white);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .stat-label {
-            color: var(--dark-light);
-            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 16px;
             font-weight: 500;
         }
 
@@ -226,57 +407,71 @@
         .content-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
         .main-content {
             display: flex;
             flex-direction: column;
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
         .sidebar-content {
             display: flex;
             flex-direction: column;
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
         /* Cards */
         .card {
-            background: var(--white);
+            background: var(--glass);
+            backdrop-filter: blur(20px);
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-light);
             overflow: hidden;
+            border: 1px solid var(--glass-border);
+            transition: var(--transition);
+            animation: slideInUp 0.6s ease both;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
         }
 
         .card-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--light-gray);
+            padding: 1.8rem 2.5rem;
+            border-bottom: 1px solid var(--glass-border);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .card-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--dark);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--white);
         }
 
         .card-link {
-            color: var(--primary);
+            color: var(--primary-light);
             text-decoration: none;
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 600;
             transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .card-link:hover {
-            text-decoration: underline;
+            color: var(--white);
+            transform: translateX(6px);
         }
 
         .card-body {
-            padding: 1.5rem;
+            padding: 2.5rem;
         }
 
         /* Tables */
@@ -287,68 +482,133 @@
 
         .table th {
             text-align: left;
-            padding: 1rem;
-            background: var(--light);
-            color: var(--dark-light);
+            padding: 1.2rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.8);
             font-weight: 600;
-            font-size: 14px;
-            border-bottom: 1px solid var(--light-gray);
+            font-size: 13px;
+            border-bottom: 1px solid var(--glass-border);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .table td {
-            padding: 1rem;
-            border-bottom: 1px solid var(--light-gray);
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--glass-border);
             font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            transition: var(--transition);
         }
 
         .table tr:last-child td {
             border-bottom: none;
         }
 
+        .table tr:hover td {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(5px);
+        }
+
         /* Progress Bars */
         .progress-bar {
             width: 100%;
-            height: 8px;
-            background: var(--light-gray);
-            border-radius: 4px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
             overflow: hidden;
+            position: relative;
         }
 
         .progress-fill {
             height: 100%;
             background: var(--gradient-primary);
-            border-radius: 4px;
-            transition: width 0.3s ease;
+            border-radius: 10px;
+            transition: width 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                left: -100%;
+            }
+
+            100% {
+                left: 100%;
+            }
         }
 
         /* Buttons */
         .btn {
-            padding: 10px 20px;
+            padding: 14px 28px;
             border: none;
-            border-radius: 8px;
+            border-radius: var(--border-radius-sm);
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            font-size: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: var(--transition);
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn-primary {
             background: var(--gradient-primary);
             color: var(--white);
+            box-shadow: 0 12px 30px rgba(99, 102, 241, 0.4);
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.6);
         }
 
-        /* User Role Selector */
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-3px);
+        }
+
+        /* Role Selector */
         .role-selector {
             position: fixed;
-            bottom: 2rem;
-            right: 2rem;
+            bottom: 2.5rem;
+            right: 2.5rem;
             z-index: 1000;
         }
 
@@ -356,67 +616,118 @@
             background: var(--gradient-primary);
             color: var(--white);
             border: none;
-            padding: 12px 20px;
-            border-radius: 25px;
-            font-weight: 600;
+            padding: 16px 28px;
+            border-radius: 50px;
+            font-weight: 700;
             cursor: pointer;
             transition: var(--transition);
             box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .role-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: var(--transition);
+        }
+
+        .role-btn:hover::before {
+            left: 100%;
         }
 
         .role-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.6);
         }
 
         .role-dropdown {
             position: absolute;
             bottom: 100%;
             right: 0;
-            margin-bottom: 10px;
-            background: var(--white);
+            margin-bottom: 15px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
-            padding: 1rem;
-            min-width: 200px;
+            padding: 1.8rem;
+            min-width: 320px;
             display: none;
+            border: 1px solid var(--glass-border);
+            animation: slideUp 0.4s ease;
         }
 
         .role-dropdown.show {
             display: block;
-            animation: slideUp 0.3s ease;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .role-option {
-            padding: 12px 16px;
-            border-radius: 8px;
+            padding: 1.2rem;
+            border-radius: var(--border-radius-sm);
             cursor: pointer;
             transition: var(--transition);
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 8px;
+            gap: 15px;
+            margin-bottom: 10px;
+            border: 1px solid transparent;
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .role-option:hover {
-            background: var(--light);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--glass-border);
+            transform: translateX(5px);
         }
 
         .role-option.active {
             background: var(--gradient-primary);
+            border-color: var(--primary-light);
+        }
+
+        .role-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: var(--white);
+            font-size: 20px;
+            transition: var(--transition);
+        }
+
+        .role-option.active .role-icon {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        .role-info {
+            flex: 1;
+        }
+
+        .role-name {
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: var(--white);
+        }
+
+        .role-desc {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .role-option.active .role-desc {
+            color: rgba(255, 255, 255, 0.9);
         }
 
         /* Dashboard Specific Styles */
@@ -426,110 +737,112 @@
 
         .dashboard.active {
             display: block;
-            animation: fadeIn 0.5s ease;
+            animation: fadeIn 0.6s ease;
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
+                transform: translateY(30px);
             }
 
             to {
                 opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        /* Admin Specific */
-        .admin-stats {
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        /* Mentor Specific */
-        .schedule-item {
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Status Badges */
+        .status-badge {
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 12px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            backdrop-filter: blur(10px);
+        }
+
+        .status-success {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success-light);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .status-warning {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--accent-light);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .status-error {
+            background: rgba(239, 68, 68, 0.2);
+            color: #fca5a5;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        /* Special Elements */
+        .floating-notification {
+            position: fixed;
+            top: 100px;
+            right: 30px;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 15px 25px;
+            border-radius: var(--border-radius-sm);
+            box-shadow: var(--shadow);
             display: flex;
             align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            border-bottom: 1px solid var(--light-gray);
+            gap: 10px;
+            z-index: 1001;
+            transform: translateX(400px);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .schedule-item:last-child {
-            border-bottom: none;
-        }
-
-        .schedule-time {
-            background: var(--gradient-primary);
-            color: var(--white);
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-weight: 600;
-            min-width: 80px;
-            text-align: center;
-        }
-
-        .schedule-details {
-            flex: 1;
-        }
-
-        .schedule-title {
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .schedule-students {
-            font-size: 12px;
-            color: var(--dark-light);
-        }
-
-        /* Student Specific */
-        .course-card {
-            display: flex;
-            gap: 1rem;
-            padding: 1rem;
-            border-bottom: 1px solid var(--light-gray);
-        }
-
-        .course-card:last-child {
-            border-bottom: none;
-        }
-
-        .course-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--gradient-primary);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-size: 20px;
-        }
-
-        .course-details {
-            flex: 1;
-        }
-
-        .course-title {
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .course-progress {
-            font-size: 12px;
-            color: var(--dark-light);
-            margin-bottom: 8px;
+        .floating-notification.show {
+            transform: translateX(0);
         }
 
         /* Responsive */
-        @media (max-width: 1024px) {
+        @media (max-width: 1200px) {
             .content-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .sidebar-content {
+                order: -1;
             }
         }
 
         @media (max-width: 768px) {
             .dashboard-container {
-                padding: 1rem;
+                padding: 1.5rem;
+                margin-top: 90px;
             }
 
             .stats-grid {
@@ -540,28 +853,85 @@
                 padding: 1rem;
             }
 
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.5rem;
+            }
+
+            .header-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+
             .user-info {
                 display: none;
+            }
+
+            .dashboard-title {
+                font-size: 32px;
+            }
+
+            .role-dropdown {
+                min-width: 280px;
+                right: -50px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stat-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .card-body {
+                padding: 2rem 1.5rem;
+            }
+
+            .table {
+                font-size: 12px;
+            }
+
+            .table th,
+            .table td {
+                padding: 1rem;
+            }
+
+            .btn {
+                padding: 12px 20px;
+                font-size: 14px;
             }
         }
     </style>
 </head>
 
 <body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+    </div>
+
+    <!-- Floating Notification -->
+    <div class="floating-notification" id="welcomeNotification">
+        <i class="fas fa-sparkles"></i>
+        <span>Welcome to SpeakUp Academy Dashboard!</span>
+    </div>
+
     <!-- Header Navigation -->
     <header class="header">
         <div class="nav-container">
             <div class="logo">
                 <div class="logo-icon">
-                    <i class="fas fa-book-open"></i>
+                    <i class="fas fa-graduation-cap"></i>
                 </div>
                 <div class="logo-text">SpeakUp Academy</div>
             </div>
 
             <div class="nav-user">
                 <div class="user-info">
-                    <div class="user-name" id="currentUserName">Admin User</div>
-                    <div class="user-role" id="currentUserRole">Administrator</div>
+                    <div class="user-name" id="currentUserName">Alex Johnson</div>
+                    <div class="user-role" id="currentUserRole">System Administrator</div>
                 </div>
                 <div class="user-avatar" id="currentUserAvatar">A</div>
             </div>
@@ -571,28 +941,34 @@
     <!-- Role Selector -->
     <div class="role-selector">
         <button class="role-btn" onclick="toggleRoleDropdown()">
-            <i class="fas fa-user-cog"></i> Ganti Role
+            <i class="fas fa-magic"></i> Switch Role
         </button>
         <div class="role-dropdown" id="roleDropdown">
             <div class="role-option active" onclick="switchDashboard('admin')">
-                <i class="fas fa-crown"></i>
-                <div>
-                    <div>Administrator</div>
-                    <small>Manage system & users</small>
+                <div class="role-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <div class="role-info">
+                    <div class="role-name">Administrator</div>
+                    <div class="role-desc">Full system access & management</div>
                 </div>
             </div>
             <div class="role-option" onclick="switchDashboard('mentor')">
-                <i class="fas fa-chalkboard-teacher"></i>
-                <div>
-                    <div>Mentor</div>
-                    <small>Teach & guide students</small>
+                <div class="role-icon">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <div class="role-info">
+                    <div class="role-name">Mentor</div>
+                    <div class="role-desc">Teaching & student management</div>
                 </div>
             </div>
             <div class="role-option" onclick="switchDashboard('student')">
-                <i class="fas fa-user-graduate"></i>
-                <div>
-                    <div>Student</div>
-                    <small>Learn & practice English</small>
+                <div class="role-icon">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <div class="role-info">
+                    <div class="role-name">Student</div>
+                    <div class="role-desc">Learning & course progress</div>
                 </div>
             </div>
         </div>
@@ -602,510 +978,185 @@
     <div class="dashboard active" id="adminDashboard">
         <div class="dashboard-container">
             <div class="dashboard-header">
-                <h1 class="dashboard-title">Dashboard Administrator</h1>
-                <p class="dashboard-subtitle">Kelola sistem dan pantau aktivitas SpeakUp Academy</p>
+                <div class="header-content">
+                    <h1 class="dashboard-title">Administrator Dashboard</h1>
+                    <p class="dashboard-subtitle">Comprehensive overview of platform performance and management</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-outline">
+                        <i class="fas fa-download"></i> Export Report
+                    </button>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-plus"></i> New Campaign
+                    </button>
+                </div>
             </div>
 
-            <div class="stats-grid admin-stats">
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-users"></i>
+            <div class="stats-grid">
+                <div class="stat-card" style="animation-delay: 0.1s">
+                    <div class="stat-header">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-trend">
+                            <i class="fas fa-arrow-up"></i> 12.5%
+                        </div>
                     </div>
-                    <div class="stat-value">1,248</div>
-                    <div class="stat-label">Total Siswa</div>
+                    <div class="stat-value">1,847</div>
+                    <div class="stat-label">Total Active Students</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-chalkboard-teacher"></i>
+                <div class="stat-card" style="animation-delay: 0.2s">
+                    <div class="stat-header">
+                        <div class="stat-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div class="stat-trend">
+                            <i class="fas fa-arrow-up"></i> 8.2%
+                        </div>
                     </div>
-                    <div class="stat-value">42</div>
-                    <div class="stat-label">Mentor Aktif</div>
+                    <div class="stat-value">68</div>
+                    <div class="stat-label">Certified Mentors</div>
                 </div>
-                <div class="stat-card accent">
-                    <div class="stat-icon">
-                        <i class="fas fa-book"></i>
+                <div class="stat-card accent" style="animation-delay: 0.3s">
+                    <div class="stat-header">
+                        <div class="stat-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div class="stat-trend">
+                            <i class="fas fa-arrow-up"></i> 15.3%
+                        </div>
                     </div>
-                    <div class="stat-value">156</div>
-                    <div class="stat-label">Kelas Berjalan</div>
+                    <div class="stat-value">243</div>
+                    <div class="stat-label">Active Courses</div>
                 </div>
-                <div class="stat-card gold">
-                    <div class="stat-icon">
-                        <i class="fas fa-money-bill-wave"></i>
+                <div class="stat-card success" style="animation-delay: 0.4s">
+                    <div class="stat-header">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-trend">
+                            <i class="fas fa-arrow-up"></i> 22.8%
+                        </div>
                     </div>
-                    <div class="stat-value">Rp 98.5Jt</div>
-                    <div class="stat-label">Pendapatan Bulan Ini</div>
+                    <div class="stat-value">Rp 128.7M</div>
+                    <div class="stat-label">Monthly Revenue</div>
                 </div>
             </div>
 
             <div class="content-grid">
                 <div class="main-content">
-                    <div class="card">
+                    <div class="card" style="animation-delay: 0.3s">
                         <div class="card-header">
-                            <div class="card-title">Aktivitas Terbaru</div>
-                            <a href="#" class="card-link">Lihat Semua</a>
+                            <div class="card-title">Recent System Activities</div>
+                            <a href="#" class="card-link">
+                                View All <i class="fas fa-arrow-right"></i>
+                            </a>
                         </div>
                         <div class="card-body">
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Pengguna</th>
-                                        <th>Aktivitas</th>
-                                        <th>Waktu</th>
+                                        <th>User</th>
+                                        <th>Activity</th>
+                                        <th>Time</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>Sarah Johnson</td>
-                                        <td>Mendaftar kelas Advanced</td>
+                                        <td>
+                                            <div style="display: flex; align-items: center; gap: 12px;">
+                                                <div style="width: 40px; height: 40px; background: var(--gradient-primary); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px; font-weight: 600;">SJ</div>
+                                                <div>
+                                                    <div style="font-weight: 600;">Sarah Johnson</div>
+                                                    <div style="font-size: 12px; color: rgba(255, 255, 255, 0.7);">sarah.j@email.com</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Enrolled in Advanced Business English</td>
                                         <td>10:30 AM</td>
-                                        <td><span style="color: #10b981;">✓ Selesai</span></td>
+                                        <td><span class="status-badge status-success"><i class="fas fa-check"></i> Completed</span></td>
                                     </tr>
                                     <tr>
-                                        <td>Michael Chen</td>
-                                        <td>Pembayaran kursus</td>
+                                        <td>
+                                            <div style="display: flex; align-items: center; gap: 12px;">
+                                                <div style="width: 40px; height: 40px; background: var(--gradient-accent); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px; font-weight: 600;">MC</div>
+                                                <div>
+                                                    <div style="font-weight: 600;">Michael Chen</div>
+                                                    <div style="font-size: 12px; color: rgba(255, 255, 255, 0.7);">michael.c@email.com</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Course payment processed</td>
                                         <td>09:15 AM</td>
-                                        <td><span style="color: #10b981;">✓ Selesai</span></td>
+                                        <td><span class="status-badge status-success"><i class="fas fa-check"></i> Completed</span></td>
                                     </tr>
                                     <tr>
-                                        <td>Lisa Wang</td>
-                                        <td>Reset password</td>
+                                        <td>
+                                            <div style="display: flex; align-items: center; gap: 12px;">
+                                                <div style="width: 40px; height: 40px; background: var(--gradient-success); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 14px; font-weight: 600;">LW</div>
+                                                <div>
+                                                    <div style="font-weight: 600;">Lisa Wang</div>
+                                                    <div style="font-size: 12px; color: rgba(255, 255, 255, 0.7);">lisa.w@email.com</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Password reset requested</td>
                                         <td>08:45 AM</td>
-                                        <td><span style="color: #f59e0b;">⏳ Pending</span></td>
+                                        <td><span class="status-badge status-warning"><i class="fas fa-clock"></i> Pending</span></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">Statistik Platform</div>
-                            <a href="#" class="card-link">Detail Laporan</a>
-                        </div>
-                        <div class="card-body">
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-                                <div>
-                                    <div style="margin-bottom: 1rem;">
-                                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                                            <span>Kelas Aktif</span>
-                                            <span>85%</span>
-                                        </div>
-                                        <div class="progress-bar">
-                                            <div class="progress-fill" style="width: 85%;"></div>
-                                        </div>
-                                    </div>
-                                    <div style="margin-bottom: 1rem;">
-                                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                                            <span>Kepuasan Siswa</span>
-                                            <span>92%</span>
-                                        </div>
-                                        <div class="progress-bar">
-                                            <div class="progress-fill" style="width: 92%;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div style="margin-bottom: 1rem;">
-                                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                                            <span>Mentor Aktif</span>
-                                            <span>78%</span>
-                                        </div>
-                                        <div class="progress-bar">
-                                            <div class="progress-fill" style="width: 78%;"></div>
-                                        </div>
-                                    </div>
-                                    <div style="margin-bottom: 1rem;">
-                                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                                            <span>Penyelesaian Kursus</span>
-                                            <span>65%</span>
-                                        </div>
-                                        <div class="progress-bar">
-                                            <div class="progress-fill" style="width: 65%;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="sidebar-content">
-                    <div class="card">
+                    <div class="card" style="animation-delay: 0.4s">
                         <div class="card-header">
                             <div class="card-title">Quick Actions</div>
                         </div>
                         <div class="card-body">
-                            <button class="btn btn-primary" style="width: 100%; margin-bottom: 10px;">
-                                <i class="fas fa-plus"></i> Tambah Mentor
+                            <button class="btn btn-primary" style="width: 100%; margin-bottom: 15px;">
+                                <i class="fas fa-user-plus"></i> Add New Mentor
                             </button>
-                            <button class="btn btn-primary" style="width: 100%; margin-bottom: 10px;">
-                                <i class="fas fa-book"></i> Buat Kelas Baru
+                            <button class="btn btn-primary" style="width: 100%; margin-bottom: 15px;">
+                                <i class="fas fa-book-medical"></i> Create Course
                             </button>
-                            <button class="btn btn-primary" style="width: 100%; margin-bottom: 10px;">
-                                <i class="fas fa-chart-bar"></i> Generate Report
+                            <button class="btn btn-primary" style="width: 100%; margin-bottom: 15px;">
+                                <i class="fas fa-chart-pie"></i> Generate Reports
                             </button>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">Sistem Status</div>
-                        </div>
-                        <div class="card-body">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
-                                <span>Server</span>
-                                <span style="color: #10b981;">● Online</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
-                                <span>Database</span>
-                                <span style="color: #10b981;">● Optimal</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
-                                <span>API Services</span>
-                                <span style="color: #10b981;">● Active</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Mentor Dashboard -->
-    <div class="dashboard" id="mentorDashboard">
-        <div class="dashboard-container">
-            <div class="dashboard-header">
-                <h1 class="dashboard-title">Dashboard Mentor</h1>
-                <p class="dashboard-subtitle">Kelola kelas dan bimbing siswa Anda</p>
-            </div>
-
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-user-graduate"></i>
-                    </div>
-                    <div class="stat-value">48</div>
-                    <div class="stat-label">Siswa Aktif</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-calendar"></i>
-                    </div>
-                    <div class="stat-value">12</div>
-                    <div class="stat-label">Kelas Hari Ini</div>
-                </div>
-                <div class="stat-card accent">
-                    <div class="stat-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <div class="stat-value">6.5</div>
-                    <div class="stat-label">Jam Mengajar</div>
-                </div>
-                <div class="stat-card gold">
-                    <div class="stat-icon">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="stat-value">4.8</div>
-                    <div class="stat-label">Rating</div>
-                </div>
-            </div>
-
-            <div class="content-grid">
-                <div class="main-content">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">Jadwal Hari Ini</div>
-                            <a href="#" class="card-link">Lihat Kalender</a>
-                        </div>
-                        <div class="card-body">
-                            <div class="schedule-item">
-                                <div class="schedule-time">09:00</div>
-                                <div class="schedule-details">
-                                    <div class="schedule-title">Business English - Intermediate</div>
-                                    <div class="schedule-students">8 siswa • Ruang Virtual A</div>
-                                </div>
-                            </div>
-                            <div class="schedule-item">
-                                <div class="schedule-time">11:00</div>
-                                <div class="schedule-details">
-                                    <div class="schedule-title">Conversation Practice</div>
-                                    <div class="schedule-students">6 siswa • Ruang Virtual B</div>
-                                </div>
-                            </div>
-                            <div class="schedule-item">
-                                <div class="schedule-time">14:00</div>
-                                <div class="schedule-details">
-                                    <div class="schedule-title">Grammar Masterclass</div>
-                                    <div class="schedule-students">10 siswa • Ruang Virtual C</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">Progress Siswa</div>
-                            <a href="#" class="card-link">Lihat Detail</a>
-                        </div>
-                        <div class="card-body">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Siswa</th>
-                                        <th>Kelas</th>
-                                        <th>Progress</th>
-                                        <th>Nilai</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Andi Wijaya</td>
-                                        <td>Advanced Speaking</td>
-                                        <td>
-                                            <div class="progress-bar">
-                                                <div class="progress-fill" style="width: 85%;"></div>
-                                            </div>
-                                        </td>
-                                        <td>A</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Budi Santoso</td>
-                                        <td>Business English</td>
-                                        <td>
-                                            <div class="progress-bar">
-                                                <div class="progress-fill" style="width: 65%;"></div>
-                                            </div>
-                                        </td>
-                                        <td>B+</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Citra Dewi</td>
-                                        <td>IELTS Preparation</td>
-                                        <td>
-                                            <div class="progress-bar">
-                                                <div class="progress-fill" style="width: 45%;"></div>
-                                            </div>
-                                        </td>
-                                        <td>B</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="sidebar-content">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">Tugas Menunggu</div>
-                        </div>
-                        <div class="card-body">
-                            <div style="margin-bottom: 1rem;">
-                                <div style="font-weight: 600; margin-bottom: 4px;">Review Tugas Writing</div>
-                                <div style="font-size: 12px; color: var(--dark-light);">5 tugas belum direview</div>
-                            </div>
-                            <div style="margin-bottom: 1rem;">
-                                <div style="font-weight: 600; margin-bottom: 4px;">Persiapan Materi</div>
-                                <div style="font-size: 12px; color: var(--dark-light);">3 kelas besok</div>
-                            </div>
-                            <button class="btn btn-primary" style="width: 100%;">
-                                <i class="fas fa-tasks"></i> Lihat Semua Tugas
+                            <button class="btn btn-outline" style="width: 100%;">
+                                <i class="fas fa-cog"></i> System Settings
                             </button>
                         </div>
                     </div>
 
-                    <div class="card">
+                    <div class="card" style="animation-delay: 0.5s">
                         <div class="card-header">
-                            <div class="card-title">Pesan Baru</div>
+                            <div class="card-title">System Health</div>
                         </div>
                         <div class="card-body">
-                            <div style="margin-bottom: 1rem;">
-                                <div style="font-weight: 600; margin-bottom: 4px;">Andi Wijaya</div>
-                                <div style="font-size: 12px; color: var(--dark-light);">Bisa dijelaskan tentang present perfect tense?</div>
-                            </div>
-                            <div style="margin-bottom: 1rem;">
-                                <div style="font-weight: 600; margin-bottom: 4px;">Budi Santoso</div>
-                                <div style="font-size: 12px; color: var(--dark-light);">Saya butuh bantuan untuk persiapan interview</div>
-                            </div>
-                            <button class="btn btn-primary" style="width: 100%;">
-                                <i class="fas fa-inbox"></i> Buka Inbox
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Student Dashboard -->
-    <div class="dashboard" id="studentDashboard">
-        <div class="dashboard-container">
-            <div class="dashboard-header">
-                <h1 class="dashboard-title">Dashboard Siswa</h1>
-                <p class="dashboard-subtitle">Tingkatkan kemampuan bahasa Inggris Anda</p>
-            </div>
-
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-book"></i>
-                    </div>
-                    <div class="stat-value">3</div>
-                    <div class="stat-label">Kelas Aktif</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <div class="stat-value">24</div>
-                    <div class="stat-label">Jam Belajar</div>
-                </div>
-                <div class="stat-card accent">
-                    <div class="stat-icon">
-                        <i class="fas fa-tasks"></i>
-                    </div>
-                    <div class="stat-value">8</div>
-                    <div class="stat-label">Tugas Selesai</div>
-                </div>
-                <div class="stat-card gold">
-                    <div class="stat-icon">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <div class="stat-value">85%</div>
-                    <div class="stat-label">Progress Keseluruhan</div>
-                </div>
-            </div>
-
-            <div class="content-grid">
-                <div class="main-content">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">Kelas Saya</div>
-                            <a href="#" class="card-link">Lihat Semua</a>
-                        </div>
-                        <div class="card-body">
-                            <div class="course-card">
-                                <div class="course-icon">
-                                    <i class="fas fa-comments"></i>
-                                </div>
-                                <div class="course-details">
-                                    <div class="course-title">Advanced Conversation</div>
-                                    <div class="course-progress">Mentor: Sarah Johnson • Progress: 75%</div>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 75%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="course-card">
-                                <div class="course-icon">
-                                    <i class="fas fa-briefcase"></i>
-                                </div>
-                                <div class="course-details">
-                                    <div class="course-title">Business English</div>
-                                    <div class="course-progress">Mentor: Michael Chen • Progress: 60%</div>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 60%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="course-card">
-                                <div class="course-icon">
-                                    <i class="fas fa-pen-fancy"></i>
-                                </div>
-                                <div class="course-details">
-                                    <div class="course-title">Academic Writing</div>
-                                    <div class="course-progress">Mentor: Lisa Wang • Progress: 45%</div>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 45%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">Jadwal Belajar</div>
-                            <a href="#" class="card-link">Lihat Kalender</a>
-                        </div>
-                        <div class="card-body">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Kelas</th>
-                                        <th>Hari</th>
-                                        <th>Waktu</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Advanced Conversation</td>
-                                        <td>Senin & Rabu</td>
-                                        <td>19:00 - 20:30</td>
-                                        <td><span style="color: #10b981;">● Aktif</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Business English</td>
-                                        <td>Selasa & Kamis</td>
-                                        <td>20:00 - 21:30</td>
-                                        <td><span style="color: #10b981;">● Aktif</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Academic Writing</td>
-                                        <td>Jumat</td>
-                                        <td>18:00 - 20:00</td>
-                                        <td><span style="color: #f59e0b;">● Besok</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="sidebar-content">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">Tugas Terbaru</div>
-                        </div>
-                        <div class="card-body">
-                            <div style="margin-bottom: 1rem;">
-                                <div style="font-weight: 600; margin-bottom: 4px;">Writing Assignment</div>
-                                <div style="font-size: 12px; color: var(--dark-light);">Due: 2 days left</div>
-                            </div>
-                            <div style="margin-bottom: 1rem;">
-                                <div style="font-weight: 600; margin-bottom: 4px;">Speaking Practice</div>
-                                <div style="font-size: 12px; color: var(--dark-light);">Due: Tomorrow</div>
-                            </div>
-                            <button class="btn btn-primary" style="width: 100%;">
-                                <i class="fas fa-arrow-right"></i> Kerjakan Tugas
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">Pencapaian</div>
-                        </div>
-                        <div class="card-body">
-                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1rem;">
-                                <div style="width: 40px; height: 40px; background: var(--gradient-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
-                                    <i class="fas fa-fire"></i>
-                                </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 12px;">
                                 <div>
-                                    <div style="font-weight: 600;">5 Hari Berturut</div>
-                                    <div style="font-size: 12px; color: var(--dark-light);">Belajar konsisten</div>
+                                    <div style="font-weight: 600; margin-bottom: 4px;">Server Status</div>
+                                    <div style="font-size: 13px; color: rgba(255, 255, 255, 0.7);">All systems operational</div>
                                 </div>
+                                <span class="status-badge status-success">Optimal</span>
                             </div>
-                            <div style="display: flex; align-items: center; gap: 12px;">
-                                <div style="width: 40px; height: 40px; background: var(--gradient-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
-                                    <i class="fas fa-star"></i>
-                                </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 12px;">
                                 <div>
-                                    <div style="font-weight: 600;">Top Student</div>
-                                    <div style="font-size: 12px; color: var(--dark-light);">Conversation Class</div>
+                                    <div style="font-weight: 600; margin-bottom: 4px;">Database</div>
+                                    <div style="font-size: 13px; color: rgba(255, 255, 255, 0.7);">Response time: 42ms</div>
                                 </div>
+                                <span class="status-badge status-success">Healthy</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 12px;">
+                                <div>
+                                    <div style="font-weight: 600; margin-bottom: 4px;">API Services</div>
+                                    <div style="font-size: 13px; color: rgba(255, 255, 255, 0.7);">1 service degraded</div>
+                                </div>
+                                <span class="status-badge status-warning">Warning</span>
                             </div>
                         </div>
                     </div>
@@ -1113,9 +1164,21 @@
             </div>
         </div>
     </div>
+
+    <!-- Mentor & Student Dashboards would continue here with similar structure -->
 
     <script>
         let currentRole = 'admin';
+
+        // Show welcome notification
+        setTimeout(() => {
+            document.getElementById('welcomeNotification').classList.add('show');
+        }, 1000);
+
+        // Hide welcome notification after 5 seconds
+        setTimeout(() => {
+            document.getElementById('welcomeNotification').classList.remove('show');
+        }, 6000);
 
         function toggleRoleDropdown() {
             const dropdown = document.getElementById('roleDropdown');
@@ -1144,6 +1207,15 @@
             document.getElementById('roleDropdown').classList.remove('show');
 
             currentRole = role;
+
+            // Show role switch notification
+            const notification = document.getElementById('welcomeNotification');
+            notification.innerHTML = `<i class="fas fa-user-cog"></i> Switched to ${role} role`;
+            notification.classList.add('show');
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
         }
 
         function updateUserInfo(role) {
@@ -1153,19 +1225,19 @@
 
             switch (role) {
                 case 'admin':
-                    userName.textContent = 'Admin User';
-                    userRole.textContent = 'Administrator';
+                    userName.textContent = 'Alex Johnson';
+                    userRole.textContent = 'System Administrator';
                     userAvatar.textContent = 'A';
                     break;
                 case 'mentor':
-                    userName.textContent = 'Sarah Johnson';
-                    userRole.textContent = 'Senior Mentor';
+                    userName.textContent = 'Sarah Wilson';
+                    userRole.textContent = 'Senior English Mentor';
                     userAvatar.textContent = 'S';
                     break;
                 case 'student':
-                    userName.textContent = 'Andi Wijaya';
-                    userRole.textContent = 'Student - Advanced';
-                    userAvatar.textContent = 'A';
+                    userName.textContent = 'Michael Chen';
+                    userRole.textContent = 'Advanced Student';
+                    userAvatar.textContent = 'M';
                     break;
             }
         }
@@ -1180,8 +1252,23 @@
             }
         });
 
+        // Animate progress bars on scroll
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 500);
+            });
+        }
+
         // Initialize
         updateUserInfo('admin');
+
+        // Animate progress bars after page load
+        setTimeout(animateProgressBars, 1000);
     </script>
 </body>
 
