@@ -928,7 +928,7 @@
                 </form>
 
                 <div class="register-link">
-                    Belum punya akun? <a href="#">Daftar sekarang</a>
+                    Belum punya akun? <a href="/registrasi">Daftar sekarang</a>
                 </div>
 
                 <div class="footer">
@@ -1077,11 +1077,11 @@
             }
         });
 
-        // Register link functionality
-        document.querySelector('.register-link a').addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('Fitur pendaftaran akan segera diimplementasikan');
-        });
+        // // Register link functionality
+        // document.querySelector('.register-link a').addEventListener('click', function(e) {
+        //     e.preventDefault();
+        //     alert('Fitur pendaftaran akan segera diimplementasikan');
+        // });
 
         // CTA Button functionality
         document.querySelector('.cta-button').addEventListener('click', function(e) {

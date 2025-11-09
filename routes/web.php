@@ -28,4 +28,6 @@ Route::get('/homeMentor', function () {
 Route::get('/homeSiswa', function () {
     return view('homeSiswa');
 });
-
+Route::get('/registrasi', function () {
+    return view('registrasi');
+})->name('registrasi');
