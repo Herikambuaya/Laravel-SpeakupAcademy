@@ -882,7 +882,7 @@
                     </div>
                 </div>
                 <div class="logo-text">
-                    <h1>SpeakUp<br>Academy</h1>
+                    <h1>SpeakUp Herman<br>Academy</h1>
                     <p>Premium English Learning</p>
                     <div class="tagline">Transform your English speaking skills with expert guidance</div>
                 </div>
