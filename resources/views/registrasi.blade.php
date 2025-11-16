@@ -285,7 +285,7 @@
         /* Registration Section */
         .registration-section {
             flex: 1;
-            padding: 40px;
+            padding: 30px;
             display: flex;
             flex-direction: column;
             background: var(--white);
@@ -300,7 +300,7 @@
         }
 
         .registration-header {
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             text-align: center;
         }
 
@@ -322,12 +322,12 @@
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-bottom: 16px;
+            gap: 14px;
+            margin-bottom: 10px;
         }
 
         .form-group {
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         .form-group.full-width {
@@ -350,7 +350,7 @@
         .form-select,
         .form-textarea {
             width: 100%;
-            padding: 14px 16px;
+            padding: 12px 14px;
             border: 2px solid var(--light-gray);
             border-radius: var(--border-radius-sm);
             font-size: 14px;
@@ -368,14 +368,14 @@
         }
 
         .form-textarea {
-            min-height: 80px;
+            min-height: 70px;
             resize: vertical;
             line-height: 1.5;
         }
 
         .input-icon {
             position: absolute;
-            right: 16px;
+            right: 14px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--gray);
@@ -415,7 +415,7 @@
             display: flex;
             align-items: flex-start;
             gap: 10px;
-            margin: 20px 0;
+            margin: 16px 0;
             cursor: pointer;
         }
 
@@ -470,7 +470,7 @@
         /* Register Button */
         .register-btn {
             width: 100%;
-            padding: 16px;
+            padding: 14px;
             background: var(--gradient-primary);
             color: var(--white);
             border: none;
@@ -495,7 +495,7 @@
 
         .login-link {
             text-align: center;
-            margin-top: 24px;
+            margin-top: 20px;
             color: var(--dark-light);
             font-size: 14px;
         }
@@ -513,8 +513,8 @@
 
         /* Footer */
         .footer {
-            margin-top: 30px;
-            padding-top: 20px;
+            margin-top: 20px;
+            padding-top: 16px;
             border-top: 1px solid var(--light-gray);
             text-align: center;
         }
@@ -523,7 +523,7 @@
             display: flex;
             justify-content: center;
             gap: 16px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .footer-links a {
@@ -556,7 +556,7 @@
             }
 
             .registration-section {
-                padding: 30px;
+                padding: 25px;
             }
 
             .hero-content h2 {
@@ -575,7 +575,7 @@
             }
 
             .registration-section {
-                padding: 25px 20px;
+                padding: 20px;
             }
 
             .registration-header h2 {
@@ -603,7 +603,7 @@
             .form-input,
             .form-select,
             .form-textarea {
-                padding: 12px 14px;
+                padding: 10px 12px;
             }
 
             .hero-section {
@@ -611,7 +611,7 @@
             }
 
             .registration-section {
-                padding: 20px 15px;
+                padding: 15px;
             }
 
             .logo {
